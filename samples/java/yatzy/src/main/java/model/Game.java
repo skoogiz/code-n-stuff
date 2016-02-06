@@ -1,4 +1,4 @@
-package base;
+package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,12 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import model.Combination;
-import model.Dice;
-import model.Player;
-import model.ScoreCard;
-
-public class Yahtzee {
+public class Game {
 
 	private final static int DICE_TYPE = 6;
 
@@ -23,11 +18,11 @@ public class Yahtzee {
 	private Dice[] dices = { new Dice(DICE_TYPE), new Dice(DICE_TYPE), new Dice(DICE_TYPE), new Dice(DICE_TYPE),
 			new Dice(DICE_TYPE) };
 
-	public Yahtzee(Player... players) {
+	public Game(Player... players) {
 		init(Arrays.asList(players));
 	}
 
-	public Yahtzee(List<Player> players) {
+	public Game(List<Player> players) {
 		init(players);
 	}
 

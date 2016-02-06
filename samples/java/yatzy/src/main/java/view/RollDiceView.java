@@ -12,8 +12,8 @@ import javax.swing.JTable;
 
 import model.Combination;
 import model.Dice;
+import model.Game;
 import model.Player;
-import base.Yahtzee;
 
 public class RollDiceView extends JFrame {
 
@@ -24,11 +24,12 @@ public class RollDiceView extends JFrame {
 	private JButton rollButton;
 
 	private JPanel gamePanel;
-	private JPanel scorePanel;
 
 	// Model för spelet
-	private Yahtzee game;
+	private Game game;
 
+	
+	
 	// View för tärning
 	private List<DiceImage> diceImages = new ArrayList<DiceImage>();
 
@@ -45,7 +46,7 @@ public class RollDiceView extends JFrame {
 		buttonPanel = new JPanel();
 
 		// Initiera Model för tärningar
-		game = new Yahtzee(new Player("Anders"), new Player("Danne"));
+		game = new Game(new Player("Anders"), new Player("Danne"));
 		for (Dice dice : game.getDices()) {
 			// Initiera View för tärning
 			DiceImage img = new DiceImage(dice);
@@ -80,26 +81,8 @@ public class RollDiceView extends JFrame {
 		gamePanel.add(buttonPanel, BorderLayout.SOUTH);
 		mainPanel.add(gamePanel, BorderLayout.CENTER);
 
-		scorePanel = new JPanel(new BorderLayout());
-						
-		String[] columnHeaders = new String[game.getPlyers().size() + 1];
-		int index = 0;
-		columnHeaders[index++] = "#";
-		for (Player player : game.getPlyers()) {
-			columnHeaders[index++] = player.getName();
-		}
+		ScorePanel scorePanel = new ScorePanel(game);
 		
-		Object[][] tableData = new Object[Combination.size()][columnHeaders.length];
-		
-		for (int i = 0; i < tableData.length; i++) {
-			tableData[i][0] = Combination.get(i);
-			
-		}
-		
-		JTable table = new JTable(tableData, columnHeaders);
-		
-		scorePanel.add(table.getTableHeader(), BorderLayout.PAGE_START);
-		scorePanel.add(table, BorderLayout.CENTER);
 		mainPanel.add(scorePanel, BorderLayout.PAGE_END);
 
 		add(mainPanel);

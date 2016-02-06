@@ -6,9 +6,10 @@ import javax.swing.ImageIcon;
 
 import model.Combination;
 import model.Dice;
+import model.Game;
 import model.Player;
 
-public class Game {
+public class ConsoleUI {
 	
 	public static void print(List<Dice> dices) {
 		String s = "";
@@ -30,7 +31,7 @@ public class Game {
 		Player danne = new Player("Danne");
 		Player anders = new Player("Anders");
 		
-		Yahtzee game = new Yahtzee(danne, anders);
+		Game game = new Game(danne, anders);
 		
 		for (Combination combination  : Combination.values()) {
 			for (Player player : game.getPlyers()) {
