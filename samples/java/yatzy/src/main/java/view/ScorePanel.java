@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import model.Combination;
 import model.Game;
 import model.Player;
+import model.ScoreCard;
 
 public class ScorePanel extends JPanel implements Observer {
 
@@ -48,6 +49,10 @@ public class ScorePanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		if (o instanceof ScoreCard) {
+			ScoreCard sc = (ScoreCard) o;
+		}
+		System.out.println("Hej");
 		// TODO Auto-generated method stub
 	}
 
