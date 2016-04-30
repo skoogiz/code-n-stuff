@@ -20,14 +20,13 @@ public class Start {
 	}
 
 	public static String genCharacter(String name) {
-		CharacterTemplate template = new CharacterTemplate.Builder("Högalv")
+		CharacterTemplate template = new CharacterTemplate.Builder("HÃ¶galv")
 				.rarity(Rarity.RARE).habitat("4ABG").movement("L10")
 				.ability("STY", "2T6+3").ability("STO", "2T4+7")
 				.ability("FYS", "1T6+2").ability("SMI", "3T6")
 				.ability("INT", "4T6").ability("PSY", "4T6+1")
-				.ability("KAR", "3T6").skill("Gö"
-						+ "mma sig", 6)
-				.skill("Upptäcka fara", 10).build();
+				.ability("KAR", "3T6").skill("GÃ¶mma sig", 6)
+				.skill("UpptÃ¤cka fara", 10).build();
 		return Character.generateCharacter(name, template).toJson(true);
 	}
 	
