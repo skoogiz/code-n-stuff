@@ -7,10 +7,12 @@ package com.skoogiz.monsters;
  * @author ask
  *
  */
-public class MonsterTemplate {
+public class MonsterTemplate
+{
 
-	public Monster generate() {
-		return new Monster();
-	}
+    public Monster generate()
+    {
+	return new Monster();
+    }
 
 }

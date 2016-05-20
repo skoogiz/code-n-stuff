@@ -14,5 +14,6 @@ import cucumber.api.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty" })
-public class RunCucumberTest {
+public class RunCucumberTest
+{
 }

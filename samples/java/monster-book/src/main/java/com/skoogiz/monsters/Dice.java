@@ -9,29 +9,34 @@ import java.util.Random;
  * @author PC
  *
  */
-public class Dice {
+public class Dice
+{
 
-	private final int sides;
-	
-	private Random random;
+    private final int sides;
 
-	private int currentValue;
-	
-	public Dice(int sides) {
-		this.sides = sides;
-		this.random = new Random();
-	}
+    private Random random;
 
-	public int roll() {
-		return (currentValue = random.nextInt(sides) + 1);
-	}
+    private int currentValue;
 
-	public int getSides() {
-		return sides;
-	}
+    public Dice(int sides)
+    {
+        this.sides = sides;
+        this.random = new Random();
+    }
 
-	public int getCurrentValue() {
-		return currentValue;
-	}
+    public int roll()
+    {
+        return (currentValue = random.nextInt(sides) + 1);
+    }
+
+    public int getSides()
+    {
+        return sides;
+    }
+
+    public int getCurrentValue()
+    {
+        return currentValue;
+    }
 
 }
