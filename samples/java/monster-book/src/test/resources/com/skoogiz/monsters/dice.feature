@@ -1,13 +1,17 @@
 Feature: Dice
 
-  Scenario: roll a 6 sided dice
-    Given I have a dice with 6 sides
+  Scenario Outline: roll a dice
+    Given I have a dice with <sides> sides
     When I roll a dice to generate a random value
-    Then I get a value between 1 and 6
+    Then I get a value between <min> and <max>
     And I can retrieve the current value
     
-  Scenario: roll a 20 sided dice
-    Given I have a dice with 20 sides
-    When I roll a dice to generate a random value
-    Then I get a value between 1 and 20
-    And I can retrieve the current value
+  Examples:
+    | sides |  min  |  max  |
+    |     6 |     1 |     6 |
+    |     8 |     1 |     8 |
+    |    10 |     1 |    10 |
+    |    12 |     1 |    12 |
+    |    20 |     1 |    20 |
+    |   100 |     1 |   100 |
+    
