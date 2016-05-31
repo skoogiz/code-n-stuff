@@ -21,6 +21,8 @@ public class DiceStepDefs
 
     private Dice dice;
 
+    private DiceFormula formula;
+
     private int currentNumber;
 
     @Given("^I have a dice with (\\d+) sides$")
@@ -51,4 +53,16 @@ public class DiceStepDefs
         assertEquals(currentNumber, dice.getCurrentValue());
     }
 
+    @Given("^a dice formula \"(.+)\"$")
+    public void a_dice_formula(String formula) throws Throwable
+    {
+        this.formula = DiceFormula.parse(formula);
+    }
+
+    @When("^generating a random value$")
+    public void generating_a_random_value() throws Throwable
+    {
+        currentNumber = formula.generate();
+
+    }
 }
