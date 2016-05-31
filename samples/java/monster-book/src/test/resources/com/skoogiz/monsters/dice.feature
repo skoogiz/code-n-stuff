@@ -15,3 +15,12 @@ Feature: Dice
     |    20 |     1 |    20 |
     |   100 |     1 |   100 |
     
+  Scenario: parse a dice formula
+    Given a dice formula 3D6
+    When generating a random value
+    Then I get a value between 3 and 18
+    
+  Scenario: parse a dice formula with modifier
+    Given a dice formula 3D6+3
+    When generating a random value
+    Then I get a value between 6 and 21
