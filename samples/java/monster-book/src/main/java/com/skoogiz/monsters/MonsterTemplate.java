@@ -9,10 +9,22 @@ package com.skoogiz.monsters;
  */
 public class MonsterTemplate
 {
+    private MonsterTemplate(Builder builder)
+    {
+
+    }
 
     public Monster generate()
     {
-	return new Monster();
+        return new Monster();
+    }
+
+    public static class Builder
+    {
+        public MonsterTemplate build()
+        {
+            return new MonsterTemplate(this);
+        }
     }
 
 }
