@@ -31,64 +31,66 @@ public class MonsterStepDefs
 
     private MonsterTemplate template;
 
-    private MonsterTemplate.Builder builder;
+    private MonsterTemplate.Builder templateBuilder;
 
     private Monster monster;
+
+    private Monster.Builder monsterBuilder;
 
     private Ability currentAbility;
 
     @Given("^a monster template builder exists$")
     public void a_monster_template_builder()
     {
-        builder = new Builder();
+        templateBuilder = new Builder();
     }
 
     @When("^set race \"([^\"]*)\"$")
     public void set_race(String race)
     {
-        builder.race(race);
+        templateBuilder.race(race);
     }
 
     @When("^set abilities:$")
     public void set_abilities(Map<String, String> abilities)
     {
-        abilities.forEach((name, formula) -> builder.ability(name, formula));
+        abilities.forEach((name, formula) -> templateBuilder.ability(name, formula));
     }
 
     @When("^set habitats:$")
     public void set_habitats(List<String> habitats)
     {
-        habitats.forEach((habitat) -> builder.habitat(habitat));
+        habitats.forEach((habitat) -> templateBuilder.habitat(habitat));
     }
 
     @When("^set rarity \"([^\"]*)\"$")
     public void set_rarity(String rarity)
     {
-        builder.rarity(rarity);
+        templateBuilder.rarity(rarity);
     }
 
     @When("^set movement on land \"([^\"]*)\"$")
     public void set_movement_on_land(String movement)
     {
-        builder.movement(movement);
+        templateBuilder.movement(movement);
     }
 
     @When("^set natural protection \"(\\d+)\"$")
     public void set_natural_protection(int protection)
     {
-        builder.protection(protection);
+        templateBuilder.protection(protection);
     }
 
     @When("^set numbers they show up in \"([^\"]*)\"$")
     public void set_numbers_they_show_up_in(String numbers)
     {
-        builder.numbers(numbers);
+        templateBuilder.numbers(numbers);
     }
 
     @When("^build monster template$")
     public void build_monster_template()
     {
-        template = builder.build();
+        template = templateBuilder.build();
 
     }
 
@@ -125,7 +127,7 @@ public class MonsterStepDefs
     @Given("^set ability \"(.*)\" with formula \"(.*)\"$")
     public void set_ability_with_formula(String name, String formula)
     {
-        builder.ability(name, formula);
+        templateBuilder.ability(name, formula);
     }
 
     @Then("^monster has ability named \"(.*)\"$")

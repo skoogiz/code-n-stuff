@@ -4,6 +4,7 @@
 package com.skoogiz.monsters.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public interface MonsterTemplate
 {
-    public abstract AbilityTemplates getAbilities();
+    public abstract Collection<AbilityTemplate> getAbilityTemplates();
 
     public abstract String getRace();
 
@@ -24,11 +25,11 @@ public interface MonsterTemplate
 
     public abstract String getNumbers();
 
-    public abstract List<Habitat> getHabitats();
+    public abstract Collection<Habitat> getHabitats();
 
     public static class Builder
     {
-        private final AbilityTemplates abilities;
+        private final List<AbilityTemplate> abilities;
         private final List<Habitat> habitats;
 
         private String race;
@@ -39,13 +40,13 @@ public interface MonsterTemplate
 
         public Builder()
         {
-            this.abilities = new AbilityTemplates();
+            this.abilities = new ArrayList<>();
             this.habitats = new ArrayList<>();
         }
 
         public Builder ability(String name, String formula)
         {
-            this.abilities.add(name, formula);
+            this.abilities.add(AbilityTemplate.create(name, formula));
             return this;
         }
 
@@ -126,7 +127,7 @@ public interface MonsterTemplate
                 }
 
                 @Override
-                public AbilityTemplates getAbilities()
+                public Collection<AbilityTemplate> getAbilityTemplates()
                 {
                     return abilities;
                 }
