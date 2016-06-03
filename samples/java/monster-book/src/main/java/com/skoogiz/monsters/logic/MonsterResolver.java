@@ -3,8 +3,8 @@ package com.skoogiz.monsters.logic;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.skoogiz.monsters.Ability;
-import com.skoogiz.monsters.Monster;
+import com.skoogiz.monsters.model.Ability;
+import com.skoogiz.monsters.model.Monster;
 import com.skoogiz.monsters.model.MonsterTemplate;
 
 public class MonsterResolver implements TemplateResolver<Monster>

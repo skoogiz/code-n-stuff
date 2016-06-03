@@ -1,6 +1,6 @@
 package com.skoogiz.monsters.model;
 
-import com.skoogiz.monsters.DiceFormula;
+import com.skoogiz.monsters.dice.DiceFormula;
 
 public interface AbilityTemplate
 {

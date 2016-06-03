@@ -1,4 +1,4 @@
-package com.skoogiz.monsters;
+package com.skoogiz.monsters.dice;
 
 import java.util.regex.Pattern;
 

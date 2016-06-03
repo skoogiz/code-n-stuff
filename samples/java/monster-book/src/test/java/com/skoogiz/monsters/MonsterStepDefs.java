@@ -13,6 +13,8 @@ import java.util.Map;
 
 import com.skoogiz.monsters.logic.MonsterResolver;
 import com.skoogiz.monsters.logic.TemplateResolver;
+import com.skoogiz.monsters.model.Ability;
+import com.skoogiz.monsters.model.Monster;
 import com.skoogiz.monsters.model.MonsterTemplate;
 import com.skoogiz.monsters.model.MonsterTemplate.Builder;
 

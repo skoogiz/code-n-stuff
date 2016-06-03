@@ -1,7 +1,7 @@
-package com.skoogiz.monsters;
+package com.skoogiz.monsters.dice;
 
-import static com.skoogiz.monsters.DiceFormulaPattern.DICE_REGEXP;
-import static com.skoogiz.monsters.DiceFormulaPattern.OPERATION_PATTERN;
+import static com.skoogiz.monsters.dice.DiceFormulaPattern.DICE_REGEXP;
+import static com.skoogiz.monsters.dice.DiceFormulaPattern.OPERATION_PATTERN;
 
 import java.util.Collection;
 import java.util.Collections;

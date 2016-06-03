@@ -1,7 +1,8 @@
 /**
  * 
  */
-package com.skoogiz.monsters;
+package com.skoogiz.monsters.model;
+
 
 /**
  * @author ask
