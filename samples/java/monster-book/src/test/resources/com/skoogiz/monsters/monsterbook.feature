@@ -25,11 +25,21 @@ Feature: Monster Book
     Given a monster template exists
     When I generate a monster
     Then a monster is created
-    
+       
+  Scenario: set race
+    Given a monster template builder exists
+    When set race "Wood Elf"
+    And build monster template
+    Then a monster template is created
+    When I generate a monster
+    Then a monster is created
+    And monster is a "Wood Elf"
+       
   Scenario Outline: generate abilities
     Given a monster template builder exists
-    And set ability "<name>" with formula "<formula>"
+    When set ability "<name>" with formula "<formula>"
     And build monster template
+    Then a monster template is created
     When I generate a monster
     Then a monster is created
     And monster has ability named "<name>"

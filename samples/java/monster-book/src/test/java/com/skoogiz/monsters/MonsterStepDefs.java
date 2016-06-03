@@ -124,7 +124,7 @@ public class MonsterStepDefs
         assertThat("it is a Monster", monster, isA(Monster.class));
     }
 
-    @Given("^set ability \"(.*)\" with formula \"(.*)\"$")
+    @When("^set ability \"(.*)\" with formula \"(.*)\"$")
     public void set_ability_with_formula(String name, String formula)
     {
         templateBuilder.ability(name, formula);
@@ -145,5 +145,11 @@ public class MonsterStepDefs
         assertThat(String.format("Abiility value '%d' is between '%d' and '%d",
             currentAbility.getValue(), min, max), true, is(currentAbility.getValue() >= min &&
             currentAbility.getValue() <= max));
+    }
+
+    @Then("^monster is a \"(.*)\"$")
+    public void monster_is_a(String race)
+    {
+        assertThat("monster is a '" + race + "'", monster.getRace(), is(race));
     }
 }

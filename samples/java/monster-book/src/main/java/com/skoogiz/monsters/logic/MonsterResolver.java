@@ -12,6 +12,8 @@ public class MonsterResolver implements TemplateResolver<Monster>
     {
         final Builder builder = new Builder();
 
+        builder.race(template.getRace());
+
         template.getAbilityTemplates().forEach(
             (ability) -> builder.ability(ability.getName(), ability.getDiceFormula().generate()));
 

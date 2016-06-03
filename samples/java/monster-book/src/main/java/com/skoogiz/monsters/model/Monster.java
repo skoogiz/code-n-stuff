@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public abstract class Monster
 {
+    public abstract String getRace();
+
     public abstract Ability getAbility(String name);
 
     public abstract Iterable<Ability> getAbilities();
@@ -21,6 +23,8 @@ public abstract class Monster
     public static class Builder
     {
         private List<Ability> abilities = new ArrayList<>();
+
+        private String race;
 
         public Builder ability(Ability ability)
         {
@@ -31,6 +35,12 @@ public abstract class Monster
         public Builder ability(String name, int value)
         {
             return ability(Ability.create(name, value));
+        }
+
+        public Builder race(String race)
+        {
+            this.race = race;
+            return this;
         }
 
         public Monster build()
@@ -44,6 +54,12 @@ public abstract class Monster
             {
 
                 private final Map<String, Ability> mappedAbilities = generatedAbilities;
+
+                @Override
+                public String getRace()
+                {
+                    return race;
+                }
 
                 @Override
                 public Ability getAbility(String name)
