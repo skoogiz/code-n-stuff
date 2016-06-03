@@ -7,7 +7,8 @@ package com.skoogiz.monsters;
  * @author ask
  *
  */
-public class Monster
+public abstract class Monster
 {
+    public abstract Ability getAbility(String name);
 
 }

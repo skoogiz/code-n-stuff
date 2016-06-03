@@ -3,30 +3,22 @@ package com.skoogiz.monsters;
 import static com.skoogiz.monsters.DiceFormulaPattern.DICE_REGEXP;
 import static com.skoogiz.monsters.DiceFormulaPattern.OPERATION_PATTERN;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Vector;
 import java.util.regex.Matcher;
 
-public class DiceFormula
+public abstract class DiceFormula
 {
-    private final String formula;
+    public abstract String getFormula();
 
-    private final Dice[] dices;
+    public abstract Integer getNumberOfDices();
 
-    private Character op;
+    public abstract Integer getSidesOnDices();
 
-    private Integer modifier;
+    public abstract Character getOperator();
 
-    private DiceFormula(String formula, Dice[] dices, char op, Integer modifier)
-    {
-        this.formula = formula;
-        this.dices = dices;
-        this.op = op;
-        this.modifier = modifier;
-    }
-
-    public String getFormula()
-    {
-        return formula;
-    }
+    public abstract Integer getModifier();
 
     public static DiceFormula parse(String formula)
     {
@@ -35,35 +27,50 @@ public class DiceFormula
 
     public int generate()
     {
-        int sum = 0;
-
-        for (Dice dice : dices)
-        {
-            sum += dice.roll();
-        }
+        int sum = asDices().stream().mapToInt(Dice::roll).sum();
 
         return modify(sum);
     }
 
+    private Collection<Dice> asDices()
+    {
+        Collection<Dice> dices = new Vector<>(getNumberOfDices());
+        for (int i = 0; i < getNumberOfDices(); i++)
+        {
+            dices.add(new Dice(getSidesOnDices()));
+        }
+        return Collections.unmodifiableCollection(dices);
+    }
+
     private int modify(int sum)
     {
-        switch (op)
+        switch (getOperator())
         {
             case '+':
-                sum = sum + modifier;
+                sum = sum + getModifier();
                 break;
             case '-':
-                sum = sum - modifier;
+                sum = sum - getModifier();
                 break;
             case '*':
-                sum = sum * modifier;
+                sum = sum * getModifier();
                 break;
             case '/':
-                sum = sum / modifier;
+                sum = sum / getModifier();
                 break;
 
         }
         return sum;
+    }
+
+    public int min()
+    {
+        return modify(getNumberOfDices());
+    }
+
+    public int max()
+    {
+        return modify(getNumberOfDices() * getSidesOnDices());
     }
 
     private static class Parser
@@ -72,28 +79,52 @@ public class DiceFormula
         {
             if (DiceFormulaPattern.validFormula(formula))
             {
-                char modifierOperation = ' ';
-                int modifierValue = 0;
-                Dice[] dices = null;
+                int nr;
+                int sides;
 
                 Matcher matcher = OPERATION_PATTERN.matcher(formula);
-                int operationIndex = formula.length();
-                if (matcher.find())
-                {
-                    operationIndex = matcher.start();
-                    modifierOperation = formula.charAt(operationIndex);
-                    modifierValue = Integer.parseInt(formula.substring(operationIndex + 1));
-                }
+                boolean hasModifier = matcher.find();
+                int operationIndex = hasModifier ? matcher.start() : formula.length();
+                char modifierOperation = hasModifier ? formula.charAt(operationIndex) : ' ';
+                int modifierValue = hasModifier ? Integer.parseInt(formula.substring(operationIndex + 1)) : 0;
 
                 String[] values = formula.substring(0, operationIndex).split(DICE_REGEXP);
-                dices = new Dice[Integer.parseInt(values[0])];
-                int size = Integer.parseInt(values[1]);
-                for (int i = 0; i < dices.length; i++)
-                {
-                    dices[i] = new Dice(size);
-                }
+                nr = Integer.parseInt(values[0]);
+                sides = Integer.parseInt(values[1]);
 
-                return new DiceFormula(formula, dices, modifierOperation, modifierValue);
+                return new DiceFormula()
+                {
+
+                    @Override
+                    public Integer getSidesOnDices()
+                    {
+                        return sides;
+                    }
+
+                    @Override
+                    public Character getOperator()
+                    {
+                        return modifierOperation;
+                    }
+
+                    @Override
+                    public Integer getNumberOfDices()
+                    {
+                        return nr;
+                    }
+
+                    @Override
+                    public Integer getModifier()
+                    {
+                        return modifierValue;
+                    }
+
+                    @Override
+                    public String getFormula()
+                    {
+                        return formula;
+                    }
+                };
             }
             else
             {
