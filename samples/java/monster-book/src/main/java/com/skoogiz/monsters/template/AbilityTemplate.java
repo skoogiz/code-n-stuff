@@ -1,12 +1,17 @@
-package com.skoogiz.monsters.model;
+package com.skoogiz.monsters.template;
 
 import com.skoogiz.monsters.dice.DiceFormula;
 
+/**
+ * 
+ * @author skoogiz
+ *
+ */
 public interface AbilityTemplate
 {
-    public abstract String getName();
+    public String getName();
 
-    public abstract DiceFormula getDiceFormula();
+    public DiceFormula getDiceFormula();
 
     public static AbilityTemplate create(final String name, final String formula)
     {

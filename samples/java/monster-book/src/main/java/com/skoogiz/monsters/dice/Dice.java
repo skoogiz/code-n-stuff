@@ -4,29 +4,29 @@
 package com.skoogiz.monsters.dice;
 
 import java.util.Random;
+import java.util.function.Function;
 
 /**
- * @author PC
+ * @author skoogiz
  *
  */
 public class Dice
 {
+    private final Function<Integer, Integer> randomNumber = nrOfSides -> new Random().nextInt(nrOfSides) + 1;
 
     private final int sides;
-
-    private Random random;
 
     private int currentValue;
 
     public Dice(int sides)
     {
         this.sides = sides;
-        this.random = new Random();
     }
 
     public int roll()
     {
-        return (currentValue = random.nextInt(sides) + 1);
+        this.currentValue = randomNumber.apply(sides);
+        return getCurrentValue();
     }
 
     public int getSides()

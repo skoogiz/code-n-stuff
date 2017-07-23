@@ -16,7 +16,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * @author ask
+ * @author skoogiz
  *
  */
 public class DiceStepDefs
@@ -47,8 +47,11 @@ public class DiceStepDefs
     @Then("^I get a value between (\\d+) and (\\d+)$")
     public void i_get_a_value_between_and(int min, int max)
     {
-        assertThat(String.format("current number '%d' is between '%d' and '%d",
-            currentNumber, min, max), true, is(currentNumber >= min && currentNumber <= max));
+        assertThat(String.format(
+            "current number '%d' is between '%d' and '%d",
+            currentNumber,
+            min,
+            max), true, is(currentNumber >= min && currentNumber <= max));
     }
 
     @Then("^I can retrieve the current value$")

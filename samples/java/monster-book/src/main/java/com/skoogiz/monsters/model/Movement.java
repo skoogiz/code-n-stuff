@@ -1,18 +1,16 @@
 package com.skoogiz.monsters.model;
 
+/**
+ * 
+ * @author skoogiz
+ *
+ */
 public interface Movement
 {
-    public abstract String getCode();
+    public String getCode();
 
     public static Movement create(final String code)
     {
-        return new Movement()
-        {
-            @Override
-            public String getCode()
-            {
-                return code;
-            }
-        };
+        return () -> code;
     }
 }

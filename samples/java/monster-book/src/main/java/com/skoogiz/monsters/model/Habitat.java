@@ -1,18 +1,16 @@
 package com.skoogiz.monsters.model;
 
+/**
+ * 
+ * @author skoogiz
+ *
+ */
 public interface Habitat
 {
-    public abstract String getCode();
+    public String getCode();
 
     public static Habitat create(final String code)
     {
-        return new Habitat()
-        {
-            @Override
-            public String getCode()
-            {
-                return code;
-            }
-        };
+        return () -> code;
     }
 }

@@ -15,15 +15,16 @@ import com.skoogiz.monsters.logic.MonsterResolver;
 import com.skoogiz.monsters.logic.TemplateResolver;
 import com.skoogiz.monsters.model.Ability;
 import com.skoogiz.monsters.model.Monster;
-import com.skoogiz.monsters.model.MonsterTemplate;
-import com.skoogiz.monsters.model.MonsterTemplate.Builder;
+import com.skoogiz.monsters.model.Race;
+import com.skoogiz.monsters.template.MonsterTemplate;
+import com.skoogiz.monsters.template.builder.MonsterTemplateBuilder;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * @author ask
+ * @author skoogiz
  *
  */
 public class MonsterStepDefs
@@ -31,24 +32,22 @@ public class MonsterStepDefs
 
     private MonsterTemplate template;
 
-    private MonsterTemplate.Builder templateBuilder;
+    private MonsterTemplateBuilder templateBuilder;
 
     private Monster monster;
-
-    private Monster.Builder monsterBuilder;
 
     private Ability currentAbility;
 
     @Given("^a monster template builder exists$")
     public void a_monster_template_builder()
     {
-        templateBuilder = new Builder();
+        templateBuilder = new MonsterTemplateBuilder();
     }
 
     @When("^set race \"([^\"]*)\"$")
     public void set_race(String race)
     {
-        templateBuilder.race(race);
+        templateBuilder.race(Race.create(race));
     }
 
     @When("^set abilities:$")
@@ -104,7 +103,7 @@ public class MonsterStepDefs
     @Given("^a monster template exists$")
     public void a_monster_template_exists()
     {
-        template = new Builder().build();
+        template = new MonsterTemplateBuilder().build();
 
         assertThat("template exists", template, is(notNullValue()));
         assertThat("it is a tamplete", template, isA(MonsterTemplate.class));
@@ -142,14 +141,17 @@ public class MonsterStepDefs
     public void with_a_value_between_and(int min, int max)
     {
 
-        assertThat(String.format("Abiility value '%d' is between '%d' and '%d",
-            currentAbility.getValue(), min, max), true, is(currentAbility.getValue() >= min &&
-            currentAbility.getValue() <= max));
+        assertThat(String.format(
+            "Abiility value '%d' is between '%d' and '%d",
+            currentAbility.getValue(),
+            min,
+            max), true, is(currentAbility.getValue() >= min &&
+                currentAbility.getValue() <= max));
     }
 
     @Then("^monster is a \"(.*)\"$")
     public void monster_is_a(String race)
     {
-        assertThat("monster is a '" + race + "'", monster.getRace(), is(race));
+        assertThat("monster is a '" + race + "'", monster.getRace().getName(), is(race));
     }
 }

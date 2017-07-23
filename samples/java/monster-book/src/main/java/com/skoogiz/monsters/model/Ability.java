@@ -1,10 +1,15 @@
 package com.skoogiz.monsters.model;
 
-public abstract class Ability
+/**
+ * 
+ * @author skoogiz
+ *
+ */
+public interface Ability
 {
-    public abstract String getName();
+    public String getName();
 
-    public abstract int getValue();
+    public int getValue();
 
     public static Ability create(final String name, final int value)
     {

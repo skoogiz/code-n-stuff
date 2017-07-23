@@ -3,9 +3,9 @@ package com.skoogiz.monsters.dice;
 import static com.skoogiz.monsters.dice.DiceFormulaPattern.DICE_REGEXP;
 import static com.skoogiz.monsters.dice.DiceFormulaPattern.OPERATION_PATTERN;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Vector;
 import java.util.regex.Matcher;
 
 public abstract class DiceFormula
@@ -34,7 +34,7 @@ public abstract class DiceFormula
 
     private Collection<Dice> asDices()
     {
-        Collection<Dice> dices = new Vector<>(getNumberOfDices());
+        Collection<Dice> dices = new ArrayList<>(getNumberOfDices());
         for (int i = 0; i < getNumberOfDices(); i++)
         {
             dices.add(new Dice(getSidesOnDices()));
@@ -47,20 +47,16 @@ public abstract class DiceFormula
         switch (getOperator())
         {
             case '+':
-                sum = sum + getModifier();
-                break;
+                return sum + getModifier();
             case '-':
-                sum = sum - getModifier();
-                break;
+                return sum - getModifier();
             case '*':
-                sum = sum * getModifier();
-                break;
+                return sum * getModifier();
             case '/':
-                sum = sum / getModifier();
-                break;
-
+                return sum / getModifier();
+            default:
+                return sum;
         }
-        return sum;
     }
 
     public int min()
@@ -73,7 +69,7 @@ public abstract class DiceFormula
         return modify(getNumberOfDices() * getSidesOnDices());
     }
 
-    private static class Parser
+    private interface Parser
     {
         public static DiceFormula parse(final String formula)
         {

@@ -1,6 +1,6 @@
 package com.skoogiz.monsters.logic;
 
-import com.skoogiz.monsters.model.MonsterTemplate;
+import com.skoogiz.monsters.template.MonsterTemplate;
 
 public interface TemplateResolver<T>
 {

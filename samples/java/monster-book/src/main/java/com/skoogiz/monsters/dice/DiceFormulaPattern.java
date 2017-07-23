@@ -16,4 +16,8 @@ public final class DiceFormulaPattern
     {
         return formula.matches(DICE_FORMULA_REGEXP);
     }
+
+    private DiceFormulaPattern()
+    {
+    }
 }
